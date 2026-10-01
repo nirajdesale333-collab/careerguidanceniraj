@@ -73,6 +73,99 @@ footer{text-align:center;padding:45px 20px;color:#777}
 .grid{grid-template-columns:1fr}.route-flow{justify-content:flex-start}.arrow{transform:rotate(90deg)}
 .details{grid-template-columns:1fr}.modal{padding:22px}.modal h2{font-size:24px}
 }
+/* Career Test */
+.test-btn{
+  margin-top:18px;
+  padding:13px 24px;
+  border:0;
+  border-radius:12px;
+  background:#4f46e5;
+  color:white;
+  font-weight:700;
+  font-size:15px;
+}
+.test-box{
+  background:white;
+  width:min(650px,100%);
+  max-height:90vh;
+  overflow:auto;
+  border-radius:20px;
+  padding:25px;
+}
+.test-option{
+  display:block;
+  width:100%;
+  text-align:left;
+  padding:14px;
+  margin:9px 0;
+  border:1px solid #d0d5dd;
+  background:#fff;
+  border-radius:12px;
+}
+.test-option:hover{
+  border-color:#4f46e5;
+  background:#f7f7ff;
+}
+.progress{
+  color:#667085;
+  font-size:13px;
+  margin:10px 0 18px;
+}
+.result-box{
+  text-align:center;
+  padding:10px;
+}
+.result-career{
+  background:#f7f7ff;
+  padding:12px;
+  margin:8px 0;
+  border-radius:10px;
+  font-weight:700;
+}
+.test-box{
+  background:white;
+  width:min(650px,100%);
+  max-height:90vh;
+  overflow:auto;
+  border-radius:20px;
+  padding:25px;
+}
+
+.test-option{
+  display:block;
+  width:100%;
+  text-align:left;
+  padding:14px;
+  margin:9px 0;
+  border:1px solid #d0d5dd;
+  background:#fff;
+  border-radius:12px;
+  cursor:pointer;
+}
+
+.test-option:hover{
+  border-color:#4f46e5;
+  background:#f7f7ff;
+}
+
+.progress{
+  color:#667085;
+  font-size:13px;
+  margin:10px 0 18px;
+}
+
+.result-box{
+  text-align:center;
+  padding:10px;
+}
+
+.result-career{
+  background:#f7f7ff;
+  padding:12px;
+  margin:8px 0;
+  border-radius:10px;
+  font-weight:700;
+}
 </style>
 </head>
 <body>
@@ -90,6 +183,12 @@ footer{text-align:center;padding:45px 20px;color:#777}
     <input id="searchInput" placeholder="Search e.g. AI, Pilot, CA, Psychology, Design..." autocomplete="off">
     <button class="primary" onclick="searchCareers()">🔍 Search</button>
   </div>
+  <div style="text-align:center;margin-top:18px">
+    <button class="primary" onclick="startCareerTest()" style="height:48px">
+    📝 Take Career Test
+    </button>
+  </div>
+  
   <div class="quick" id="quickFilters"></div>
 </section>
 
@@ -235,8 +334,308 @@ document.addEventListener("keydown", e => { if(e.key === "Escape") closeModal();
 function escapeHtml(s) {
   return s.replace(/[&<>"']/g, m => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#039;'}[m]));
 }
+/* ================= CAREER INTEREST TEST ================= */
 
+const testQuestions = [
+  {
+    q:"Which activity do you enjoy most?",
+    options:[
+      ["💻 Using technology and computers","technology"],
+      ["🎨 Drawing, designing or creating","creative"],
+      ["💰 Managing money or business ideas","business"],
+      ["🩺 Helping and caring for people","healthcare"]
+    ]
+  },
+  {
+    q:"Which subject do you enjoy most?",
+    options:[
+      ["🔬 Maths and Science","technology"],
+      ["🎨 Art and Design","creative"],
+      ["📊 Economics and Business","business"],
+      ["🧬 Biology","healthcare"]
+    ]
+  },
+  {
+    q:"What type of problem do you like solving?",
+    options:[
+      ["💻 Technical problems","technology"],
+      ["🎨 Creative problems","creative"],
+      ["💰 Business problems","business"],
+      ["🩺 People and health problems","healthcare"]
+    ]
+  },
+  {
+    q:"What would you enjoy doing in a project?",
+    options:[
+      ["🤖 Building an app or technology","technology"],
+      ["🎬 Making a creative design or video","creative"],
+      ["📈 Planning a business","business"],
+      ["🔬 Studying health or science","healthcare"]
+    ]
+  },
+  {
+    q:"Which work environment sounds interesting?",
+    options:[
+      ["💻 Technology company","technology"],
+      ["🎨 Design studio","creative"],
+      ["🏢 Business office","business"],
+      ["🏥 Hospital or laboratory","healthcare"]
+    ]
+  },
+  {
+    q:"What do you enjoy learning about?",
+    options:[
+      ["🤖 AI, computers and technology","technology"],
+      ["📸 Art, media and design","creative"],
+      ["💼 Business and finance","business"],
+      ["🧠 Human body and health","healthcare"]
+    ]
+  },
+  {
+    q:"Which skill would you like to develop?",
+    options:[
+      ["💻 Programming","technology"],
+      ["🎨 Designing","creative"],
+      ["📊 Leadership","business"],
+      ["🩺 Healthcare skills","healthcare"]
+    ]
+  },
+  {
+    q:"Which activity sounds most exciting?",
+    options:[
+      ["🤖 Creating a robot","technology"],
+      ["🎥 Creating a video","creative"],
+      ["🚀 Starting a small business","business"],
+      ["🔬 Doing a science experiment","healthcare"]
+    ]
+  },
+  {
+    q:"How do you prefer to work?",
+    options:[
+      ["💻 With computers and technology","technology"],
+      ["🎨 Creating new ideas","creative"],
+      ["👥 Leading and organizing people","business"],
+      ["🤝 Helping people","healthcare"]
+    ]
+  },
+  {
+    q:"Which career area sounds interesting?",
+    options:[
+      ["💻 Software / AI / Cybersecurity","technology"],
+      ["🎨 Design / Media / Animation","creative"],
+      ["💰 Finance / Management / Business","business"],
+      ["🩺 Medicine / Healthcare / Research","healthcare"]
+    ]
+  },
+  {
+    q:"What are you naturally curious about?",
+    options:[
+      ["⚙️ How technology works","technology"],
+      ["✨ How things can look better","creative"],
+      ["📈 How businesses grow","business"],
+      ["🧬 How the human body works","healthcare"]
+    ]
+  },
+  {
+    q:"Which task would you choose?",
+    options:[
+      ["💻 Coding a website","technology"],
+      ["🎨 Designing a poster","creative"],
+      ["📊 Making a business plan","business"],
+      ["🔬 Researching a health topic","healthcare"]
+    ]
+  },
+  {
+    q:"Which quality describes you?",
+    options:[
+      ["🧩 Logical thinker","technology"],
+      ["🎨 Creative thinker","creative"],
+      ["👑 Leader / Organizer","business"],
+      ["❤️ Helpful / Caring","healthcare"]
+    ]
+  },
+  {
+    q:"What would you like to create?",
+    options:[
+      ["📱 An app or software","technology"],
+      ["🎬 A film or design","creative"],
+      ["🏢 A successful business","business"],
+      ["🧪 A scientific solution","healthcare"]
+    ]
+  },
+  {
+    q:"Which future sounds most interesting?",
+    options:[
+      ["🤖 Working with AI and technology","technology"],
+      ["🎨 Working in creative industries","creative"],
+      ["💼 Running or managing businesses","business"],
+      ["🩺 Improving people's health","healthcare"]
+    ]
+  }
+];
+
+let testIndex = 0;
+let testScores = {
+  technology:0,
+  creative:0,
+  business:0,
+  healthcare:0
+};
+
+function startCareerTest(){
+  testIndex = 0;
+  testScores = {
+    technology:0,
+    creative:0,
+    business:0,
+    healthcare:0
+  };
+
+  document.getElementById("testBg").classList.add("show");
+  document.getElementById("testResult").style.display="none";
+  document.getElementById("testArea").style.display="block";
+
+  showTestQuestion();
+}
+
+function showTestQuestion(){
+  const item = testQuestions[testIndex];
+
+  document.getElementById("testProgress").textContent =
+    `Question ${testIndex + 1} of ${testQuestions.length}`;
+
+  document.getElementById("testQuestion").textContent = item.q;
+
+  document.getElementById("testOptions").innerHTML =
+    item.options.map((option,i) =>
+      `<button class="test-option" onclick="answerTest('${option[1]}')">
+        ${option[0]}
+      </button>`
+    ).join("");
+}
+
+function answerTest(category){
+  testScores[category]++;
+
+  testIndex++;
+
+  if(testIndex < testQuestions.length){
+    showTestQuestion();
+  }else{
+    showTestResult();
+  }
+}
+
+function showTestResult(){
+
+  const sorted = Object.entries(testScores)
+    .sort((a,b)=>b[1]-a[1]);
+
+  const names = {
+    technology:"💻 Technology & Engineering",
+    creative:"🎨 Creative & Design",
+    business:"💰 Business & Finance",
+    healthcare:"🩺 Healthcare & Science"
+  };
+
+  const careers = {
+    technology:[
+      "Software Developer",
+      "AI / Machine Learning",
+      "Cybersecurity",
+      "Data Science",
+      "Cloud Computing"
+    ],
+    creative:[
+      "UI/UX Designer",
+      "Graphic Designer",
+      "Animator",
+      "Video Editor",
+      "Digital Media"
+    ],
+    business:[
+      "Chartered Accountant",
+      "Finance",
+      "Business Management",
+      "Entrepreneurship",
+      "Marketing"
+    ],
+    healthcare:[
+      "Doctor",
+      "Pharmacy",
+      "Medical Laboratory",
+      "Biotechnology",
+      "Healthcare Research"
+    ]
+  };
+
+  const top = sorted[0][0];
+
+  document.getElementById("testArea").style.display="none";
+
+  document.getElementById("testResult").style.display="block";
+
+  document.getElementById("testResult").innerHTML = `
+    <div class="result-box">
+      <h2>🎉 Your Result</h2>
+
+      <p style="margin:12px 0;color:#667085">
+        Your strongest interest area is:
+      </p>
+
+      <h2 style="color:#4f46e5">
+        ${names[top]}
+      </h2>
+
+      <h3 style="margin-top:22px">
+        💡 Suggested Careers
+      </h3>
+
+      <div style="margin-top:10px">
+        ${careers[top].map(c =>
+          `<div class="result-career">${c}</div>`
+        ).join("")}
+      </div>
+
+      <p style="font-size:12px;color:#667085;margin-top:18px">
+        This test is for career exploration only. 
+        Consider your interests, skills, academic performance and guidance
+        from parents, teachers or career professionals before making decisions.
+      </p>
+
+      <button class="primary"
+        style="height:45px;margin-top:15px"
+        onclick="closeCareerTest()">
+        Explore Careers
+      </button>
+    </div>
+  `;
+}
+
+function closeCareerTest(){
+  document.getElementById("testBg").classList.remove("show");
+}
 render();
+<!-- Career Interest Test -->
+<div class="modal-bg" id="testBg">
+  <div class="test-box">
+    <button class="close" onclick="closeCareerTest()">×</button>
+
+    <div id="testArea">
+      <h2>📝 Career Interest Test</h2>
+      <p style="color:#667085;margin:10px 0">
+        Answer these questions based on what you enjoy.
+      </p>
+
+      <div class="progress" id="testProgress"></div>
+      <h3 id="testQuestion"></h3>
+
+      <div id="testOptions"></div>
+    </div>
+
+    <div id="testResult" style="display:none"></div>
+  </div>
+</div>
 </script>
 </body>
 </html>
