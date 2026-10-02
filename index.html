@@ -1885,7 +1885,17 @@ function closeCareerTest(){
 }
   
 function toggleMenu(){
-  document.getElementById("navLinks").classList.toggle("show");
+  const menu = document.getElementById("navLinks");
+
+  if(menu.classList.contains("show")){
+    menu.classList.remove("show");
+    menu.style.setProperty("transform","translateX(110%)","important");
+  }else{
+    menu.classList.add("show");
+    menu.style.setProperty("transform","translateX(0)","important");
+    menu.style.setProperty("width","280px","important");
+    menu.style.setProperty("max-width","80vw","important");
+  }
 }
 render();
 </script>
