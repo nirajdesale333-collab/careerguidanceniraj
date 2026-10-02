@@ -166,13 +166,126 @@ footer{text-align:center;padding:45px 20px;color:#777}
   border-radius:10px;
   font-weight:700;
 }
+/* ===== COLORFUL NAVBAR ===== */
+
+.main-nav{
+  position:sticky;
+  top:0;
+  z-index:1000;
+  background:linear-gradient(90deg,#4f46e5,#7c3aed,#ec4899);
+  box-shadow:0 4px 18px rgba(0,0,0,.12);
+}
+
+.nav-container{
+  max-width:1200px;
+  margin:auto;
+  padding:12px 20px;
+  display:flex;
+  align-items:center;
+  justify-content:space-between;
+}
+
+.logo{
+  color:white;
+  font-size:22px;
+  font-weight:800;
+  cursor:pointer;
+}
+
+.logo span{
+  color:#fde68a;
+}
+
+.nav-links{
+  display:flex;
+  align-items:center;
+  gap:8px;
+}
+
+.nav-links a{
+  color:white;
+  text-decoration:none;
+  padding:9px 12px;
+  border-radius:10px;
+  font-weight:600;
+  font-size:14px;
+  transition:.25s;
+}
+
+.nav-links a:hover{
+  background:rgba(255,255,255,.18);
+  transform:translateY(-2px);
+}
+
+.menu-toggle{
+  display:none;
+  border:0;
+  background:rgba(255,255,255,.18);
+  color:white;
+  font-size:24px;
+  padding:6px 10px;
+  border-radius:9px;
+  cursor:pointer;
+}
+
+/* Mobile Menu */
+
+@media(max-width:800px){
+
+  .menu-toggle{
+    display:block;
+  }
+
+  .nav-links{
+    display:none;
+    position:absolute;
+    top:64px;
+    left:10px;
+    right:10px;
+    background:white;
+    padding:12px;
+    border-radius:15px;
+    box-shadow:0 10px 30px rgba(0,0,0,.15);
+    flex-direction:column;
+  }
+
+  .nav-links.show{
+    display:flex;
+  }
+
+  .nav-links a{
+    width:100%;
+    color:#172033;
+    text-align:center;
+  }
+
+  .nav-links a:hover{
+    background:#f1efff;
+    color:#4f46e5;
+  }
+}
 </style>
 </head>
 <body>
-<nav class="navbar">
-  <div class="logo">🎓 CareerPath</div>
-  <div class="nav-links">
-    <a href="#home">Home</a><a href="#map">Career Map</a><a href="#careers">Explore Careers</a><a href="#about">About</a>
+<!-- NAVBAR -->
+<nav class="main-nav">
+  <div class="nav-container">
+
+    <div class="logo" onclick="window.scrollTo({top:0,behavior:'smooth'})">
+      🚀 <span>Career</span>Path
+    </div>
+
+    <button class="menu-toggle" onclick="toggleMenu()">☰</button>
+
+    <div class="nav-links" id="navLinks">
+      <a href="#home">🏠 Home</a>
+      <a href="#explorer">🧭 Explore</a>
+      <a href="#careerTest" onclick="startCareerTest();return false;">📝 Career Test</a>
+      <a href="#careerMap">🛣️ Career Paths</a>
+      <a href="#compare">⚖️ Compare</a>
+      <a href="#about">ℹ️ About</a>
+    </div>
+
   </div>
 </nav>
 
@@ -281,6 +394,7 @@ groups.forEach(group => {
     activeGroup = group;
     document.querySelectorAll(".filter-btn").forEach(x => x.classList.remove("active"));
     b.classList.add("active");
+    
     render();
   };
   filterBox.appendChild(b);
@@ -633,6 +747,9 @@ function showTestResult(){
 
 function closeCareerTest(){
   document.getElementById("testBg").classList.remove("show");
+}
+function toggleMenu(){
+  document.getElementById("navLinks").classList.toggle("show");
 }
 render();
 </script>
