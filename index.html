@@ -1298,6 +1298,103 @@ footer{
     width:280px !important;
   }
 }
+/* ===== FINAL MOBILE FIX ===== */
+
+body{
+  padding-left:0 !important;
+  overflow-x:hidden !important;
+}
+
+.main-nav{
+  position:sticky !important;
+  top:0 !important;
+  left:auto !important;
+  width:100% !important;
+  height:68px !important;
+  z-index:9999 !important;
+}
+
+.nav-container{
+  width:100% !important;
+  height:68px !important;
+  padding:0 15px !important;
+  display:flex !important;
+  align-items:center !important;
+  justify-content:space-between !important;
+}
+
+.menu-toggle{
+  display:block !important;
+  position:relative !important;
+  z-index:10002 !important;
+  flex-shrink:0 !important;
+}
+
+/* CLOSED */
+.nav-links{
+  display:flex !important;
+  position:fixed !important;
+  top:0 !important;
+  right:-310px !important;
+  width:290px !important;
+  max-width:85vw !important;
+  height:100vh !important;
+  margin:0 !important;
+  padding:85px 18px 25px !important;
+  box-sizing:border-box !important;
+  flex-direction:column !important;
+  gap:10px !important;
+  background:linear-gradient(180deg,#312e81,#4f46e5,#7c3aed,#c026d3) !important;
+  z-index:10001 !important;
+  transition:right .3s ease !important;
+  overflow-y:auto !important;
+}
+
+/* OPEN */
+.nav-links.show{
+  right:0 !important;
+}
+
+.nav-links a{
+  display:block !important;
+  width:100% !important;
+  box-sizing:border-box !important;
+  color:white !important;
+  background:rgba(255,255,255,.12) !important;
+  padding:14px !important;
+  border-radius:14px !important;
+  text-align:left !important;
+}
+
+/* MOBILE HERO */
+.hero{
+  width:100% !important;
+  min-height:480px !important;
+  box-sizing:border-box !important;
+  overflow:hidden !important;
+}
+
+.hero h1{
+  display:block !important;
+  font-size:38px !important;
+  line-height:1.15 !important;
+}
+
+.hero:before{
+  left:2% !important;
+  font-size:65px !important;
+}
+
+.hero:after{
+  right:2% !important;
+  font-size:65px !important;
+}
+
+@media(min-width:701px){
+  .hero h1{
+    font-size:56px !important;
+  }
+}
 </style>
 </head>
 <body>
