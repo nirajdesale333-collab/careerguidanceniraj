@@ -1889,6 +1889,61 @@ function toggleMenu(){
 }
 render();
 </script>
+/* ===== MOBILE MENU FINAL FIX ===== */
+
+@media (max-width:700px){
+
+  .nav-links{
+    position:fixed !important;
+    top:0 !important;
+    right:0 !important;
+
+    width:280px !important;
+    max-width:78vw !important;
+    height:100vh !important;
+
+    box-sizing:border-box !important;
+    padding:85px 15px 20px !important;
+
+    display:flex !important;
+    flex-direction:column !important;
+
+    background:linear-gradient(
+      180deg,
+      #312e81,
+      #4f46e5,
+      #7c3aed,
+      #c026d3
+    ) !important;
+
+    transform:translateX(110%) !important;
+    transition:transform .3s ease !important;
+
+    z-index:10001 !important;
+    overflow-y:auto !important;
+  }
+
+  .nav-links.show{
+    transform:translateX(0) !important;
+  }
+
+  .nav-links a{
+    width:100% !important;
+    box-sizing:border-box !important;
+    padding:14px !important;
+    font-size:16px !important;
+    border-radius:14px !important;
+    color:white !important;
+    background:rgba(255,255,255,.12) !important;
+  }
+
+  .menu-toggle{
+    position:relative !important;
+    z-index:10005 !important;
+    display:block !important;
+  }
+
+}
 <style>
 
 /* ===== HAMBURGER MENU ===== */
