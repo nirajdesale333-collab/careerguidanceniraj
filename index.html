@@ -1395,6 +1395,102 @@ body{
     font-size:56px !important;
   }
 }
+/* ===== FINAL MOBILE PAGE FIX ===== */
+
+@media (max-width:700px){
+
+  html,
+  body{
+    width:100% !important;
+    max-width:100% !important;
+    margin:0 !important;
+    padding:0 !important;
+    overflow-x:hidden !important;
+  }
+
+  *{
+    box-sizing:border-box !important;
+  }
+
+  main,
+  section,
+  .hero,
+  .container,
+  .search-row,
+  .quick,
+  .stats,
+  .route,
+  .route-card{
+    width:100% !important;
+    max-width:100% !important;
+    margin-left:0 !important;
+    margin-right:0 !important;
+  }
+
+  .hero{
+    min-height:520px !important;
+    padding:40px 18px !important;
+    overflow:hidden !important;
+  }
+
+  .hero h1{
+    max-width:100% !important;
+    font-size:36px !important;
+    line-height:1.15 !important;
+    word-break:normal !important;
+  }
+
+  .hero p{
+    max-width:100% !important;
+    font-size:16px !important;
+  }
+
+  .search-row{
+    display:flex !important;
+    flex-direction:column !important;
+    gap:10px !important;
+    padding:12px !important;
+  }
+
+  .search-row input{
+    width:100% !important;
+    max-width:100% !important;
+  }
+
+  .search-row button{
+    width:100% !important;
+  }
+
+  .quick{
+    display:flex !important;
+    flex-wrap:wrap !important;
+    justify-content:center !important;
+    gap:8px !important;
+  }
+
+  .hero:before{
+    left:-5px !important;
+    font-size:60px !important;
+  }
+
+  .hero:after{
+    right:-5px !important;
+    font-size:60px !important;
+  }
+
+  /* MENU */
+  .nav-links{
+    width:280px !important;
+    max-width:80vw !important;
+    right:auto !important;
+    left:auto !important;
+    transform:translateX(110%) !important;
+  }
+
+  .nav-links.show{
+    transform:translateX(0) !important;
+  }
+}
 </style>
 </head>
 <body>
