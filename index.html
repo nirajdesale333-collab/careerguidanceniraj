@@ -658,7 +658,11 @@ footer{
 <!-- Career Interest Test -->
 <div class="modal-bg" id="testBg">
   <div class="test-box">
-    <button class="close" onclick="closeCareerTest()">×</button>
+    <button type="button"
+onclick="closeCareerTest()"
+style="position:absolute;top:10px;right:12px;width:40px;height:40px;border:none;border-radius:50%;background:#e0e7ff;color:#312e81;font-size:28px;font-weight:bold;cursor:pointer;z-index:9999;">
+×
+</button>
 
     <div id="testArea">
       <h2>📝 Career Interest Test</h2>
@@ -1045,6 +1049,7 @@ function showTestResult(){
 function closeCareerTest(){
   document.getElementById("testBg").classList.remove("show");
 }
+  
 function toggleMenu(){
   document.getElementById("navLinks").classList.toggle("show");
 }
